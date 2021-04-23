@@ -12,9 +12,7 @@ To fix this, we have to make sure that step four never happens after step three.
 */
 
 fn main() {
-    let variable = Variable {
-        x: &10
-    };
+    let variable = Variable { x: &10 };
 
     println!("{}", implicit(&5));
     println!("{}", explicit(&5));
@@ -56,7 +54,7 @@ If you compare &mut i32 to &'a mut i32, they’re the same, it’s just that the
 // Basic example
 
 struct Variable<'a> {
-    x: &'a i32 // So why do we need a lifetime here? We need to ensure that any reference to a Foo cannot outlive the reference to an i32 it contains.
+    x: &'a i32, // So why do we need a lifetime here? We need to ensure that any reference to a Foo cannot outlive the reference to an i32 it contains.
 }
 
 // If you have multiple references, you can use the same lifetime multiple times
