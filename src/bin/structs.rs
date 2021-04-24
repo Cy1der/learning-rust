@@ -9,6 +9,8 @@
 *: This is found in a different guide (Lifetimes)
 */
 
+// Camel case is recommended for naming structs
+
 // 1     2   *    3
 struct User<'a> {
     //4    *   5

@@ -24,6 +24,7 @@ fn main() {
     let array_length = array.len(); // 5
 
     // The & is a "reference" keyword in arrays, which means it is referencing another variable
+    // If we put * before it, it dereferences the variable
     // You can "slice" the array like this
 
     let sliced_array = &array[2..4]; // [3, 4]
