@@ -1,5 +1,3 @@
-#![allow(dead_code)]
-
 // Basic enum
 
 // Camel case is recommended for naming enums
