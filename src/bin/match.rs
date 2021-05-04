@@ -15,7 +15,7 @@ fn main() {
         8 => println!("X is 8"),
         9 => println!("X is 9"),
         10 => println!("X is 10"),
-        _ => println!("X is something else..."), // If we don't have this arm with the underscore rust will give us an error; error: non-exhaustive patterns: `_` not covered 
+        _ => println!("X is something else..."), // If we don't have this arm with the underscore rust will give us an error; error: non-exhaustive patterns: `_` not covered
     };
 
     // We can use match to assign values

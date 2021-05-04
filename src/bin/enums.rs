@@ -14,7 +14,7 @@ enum Keys {
     UpKey(String),
     DownKey(String),
     LeftKey(String),
-    RightKey(String)
+    RightKey(String),
 }
 
 #[derive(Debug)]
@@ -23,7 +23,8 @@ struct Coordinates {
     y: i32,
 }
 
-impl Direction { // We can use the impl keyword to attach methods to our enum
+impl Direction {
+    // We can use the impl keyword to attach methods to our enum
     fn match_direction(&self) -> Keys {
         match *self {
             Direction::Up(_) => Keys::UpKey(String::from("Up key")),
@@ -36,7 +37,7 @@ impl Direction { // We can use the impl keyword to attach methods to our enum
 
 impl Keys {
     fn destruct(&self) -> &String {
-        match *self { 
+        match *self {
             Keys::UpKey(ref s) => s,
             Keys::DownKey(ref s) => s,
             Keys::LeftKey(ref s) => s,
@@ -49,11 +50,11 @@ fn main() {
     // An enum in Rust is a type that represents data that could be one of several possible variants
 
     // This is how we instantiate the direction
-    let up = Direction::Up(Coordinates { x: 0, y: 1 }); 
-    let down = Direction::Down(Coordinates { x: 0, y: -1});
-    let left = Direction::Left(Coordinates {x: -1, y: 0});
-    let right = Direction::Right(Coordinates {x: 1, y: 0});
-    
+    let up = Direction::Up(Coordinates { x: 0, y: 1 });
+    let down = Direction::Down(Coordinates { x: 0, y: -1 });
+    let left = Direction::Left(Coordinates { x: -1, y: 0 });
+    let right = Direction::Right(Coordinates { x: 1, y: 0 });
+
     println!("{:?}", up); // Up(Coordinates { x: 0, y: 1 })
     println!("{:?}", down);
     println!("{:?}", left);

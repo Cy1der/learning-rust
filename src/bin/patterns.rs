@@ -1,13 +1,13 @@
 fn main() {
     // This lesson extends match.rs
     // Patterns are quite common in Rust. We use them in variable bindings, match statements, and other places, too.
-    
+
     let x: i32 = 1;
 
     match x {
         1 | 2 => println!("X is 1 or 2"),
         3 => println!("X is 3"),
-        _ => println!("X is something else...")
+        _ => println!("X is something else..."),
     }
 
     // This is pretty self explanatory, you can use elses in match values.
@@ -18,7 +18,7 @@ fn main() {
 
     match y {
         1..=5 => println!("Y is 1 through 5"),
-        _ => println!("Y is something else...")
+        _ => println!("Y is something else..."),
     }
 
     // 1..=5 (an inclusive range) is the same thing as 1 | 2 | 3 | 4 | 5
@@ -30,7 +30,7 @@ fn main() {
     match z {
         'a'..='j' => println!("Early letter"),
         'k'..='z' => println!("Late letter"),
-        _ => println!("Something else...")
+        _ => println!("Something else..."),
     }
 
     // Bindings:
@@ -41,7 +41,7 @@ fn main() {
 
     match a {
         val @ 1..=100 => println!("A is 1 through 100: {}", val),
-        _ => println!("A is something else...")
+        _ => println!("A is something else..."),
     }
 
     // These are useful for complex data structures
@@ -55,7 +55,10 @@ fn main() {
     let x: Option<Person> = Some(Person { name: Some(name) });
 
     match x {
-        Some(Person { name: ref a @ Some(_), .. }) => println!("{:?}", a), // Some("Steve")
+        Some(Person {
+            name: ref a @ Some(_),
+            ..
+        }) => println!("{:?}", a), // Some("Steve")
         _ => {}
     }
 
@@ -66,7 +69,7 @@ fn main() {
     enum Integer {
         Value(i32),
         #[allow(dead_code)]
-        Missing
+        Missing,
     }
 
     let y = Integer::Value(10);
@@ -95,7 +98,7 @@ fn main() {
 
     match x {
         4 | 5 if y => println!("Yes!"),
-        _ => println!("No.")
+        _ => println!("No."),
     }
 
     /*
@@ -113,15 +116,15 @@ fn main() {
     let z: i32 = 5;
 
     match z {
-        ref r => println!("Got a reference to {}", r)
+        ref r => println!("Got a reference to {}", r),
     }
 
     // Mutable References
-    
+
     let mut a: i32 = 5;
 
     match a {
-        ref mut mr => println!("Got a mutable reference to {}", mr)
+        ref mut mr => println!("Got a mutable reference to {}", mr),
     }
 
     // Destructuring
@@ -130,7 +133,7 @@ fn main() {
 
     struct Point {
         x: i32,
-        y: i32
+        y: i32,
     }
 
     let origin = Point { x: 0, y: 0 };
@@ -141,7 +144,6 @@ fn main() {
 
     // We can use : to give a value a different name.
 
-    
     match origin {
         Point { x: x1, y: y1 } => println!("({},{})", x1, y1),
     }
@@ -153,4 +155,5 @@ fn main() {
     }
 
     // Patterns are very powerful!
+    // !!! You can mix and match these concepts! !!!
 }
