@@ -1,4 +1,5 @@
 use std::*;
+#[allow(dead_code)]
 fn main() {
     // There are two main kinds of errors that can occur in your programs: failures, and panics. Let's talk about the difference between the two, and then discuss how to handle each. Then, we'll discuss upgrading failures to panics.
 
@@ -148,4 +149,65 @@ fn main() {
     let num_bytes_read = io::stdin().read_line(&mut buffer).ok().expect("Failed to read line");
 
     // ok() converts the Result into an Option, and expect() does the same thing as unwrap(), but takes a message. This message is passed along to the underlying panic!, providing a better error message if the code errors.
+
+    // Using ? 
+
+    // When writing code that calls many functions that return the Result type, the error handling can be tedious. The ? "macro" hides some of the boilerplate of propagating errors up the call stack.
+
+    // Syntax: <function>?;
+
+    // Turns this:
+
+    use std::fs::File;
+    use std::io::prelude::*;
+
+    struct Info {
+        name: String,
+        age: i32,
+        rating: i32,
+    }
+
+    fn write_info(info: &Info) -> io::Result<()> {
+        let mut file = File::create("my_best_friends.txt").unwrap();
+
+        if let Err(e) = writeln!(&mut file, "name: {}", info.name) {
+            return Err(e)
+        }
+        if let Err(e) = writeln!(&mut file, "age: {}", info.age) {
+            return Err(e)
+        }
+        if let Err(e) = writeln!(&mut file, "rating: {}", info.rating) {
+            return Err(e)
+        }
+
+        return Ok(());
+    }
+
+    // Into this:
+
+    struct Info2 {
+        name: String,
+        age: i32,
+        rating: i32,
+    }
+
+    fn write_info2(info: &Info) -> io::Result<()> {
+        let mut file = File::create("my_best_friends.txt").unwrap();
+
+        writeln!(&mut file, "name: {}", info.name)?;
+        writeln!(&mut file, "age: {}", info.age)?;
+        writeln!(&mut file, "rating: {}", info.rating)?;
+
+        return Ok(());
+    }
+
+    /*
+
+    Wrapping an expression in ? will result in the unwrapped success (Ok) value, unless the result is Err, in which case Err is returned early from the enclosing function.
+
+    It's worth noting that you can only use ? from a function that returns a Result, which means that you cannot use ? inside of main(), because main() doesn't return anything.
+
+    ? makes use of From<Error> to determine what to return in the error case.
+
+    */
 }
